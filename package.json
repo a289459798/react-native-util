@@ -1,0 +1,22 @@
+{
+  "name": "@ichong/react-native-util",
+  "version": "1.0.0",
+  "description": "## Getting started",
+  "main": "index.js",
+  "homepage": "https://gitee.com/petdoctor/react-native-util.git#readme",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "react-native"
+  ],
+  "author": "zhangzy",
+  "license": "ISC",
+  "peerDependencies": {
+    "react-native": "^0.41.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://gitee.com/petdoctor/react-native-util.git"
+  }
+}
