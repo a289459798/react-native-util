@@ -1,5 +1,9 @@
-module.exports = {
-    QiNiu: require('./qiniu').default,
-    Encrpyt: require('./encrypt').default,
-    Update: require('./update').default
+import QiNiu from './src/qiniu';
+import Encrpyt from './src/encrypt';
+import Update from './src/update';
+
+export {
+    QiNiu,
+    Encrpyt,
+    Update,
 };
