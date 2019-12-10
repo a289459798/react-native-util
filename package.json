@@ -20,7 +20,7 @@
     "#USER",
     "/"
   ],
-  "_resolved": "git+https://gitee.com/petdoctor/react-native-util.git#1fb6aae167fc2cbd23b7e3e72606d0cc7bce8fd1",
+  "_resolved": "git+https://gitee.com/petdoctor/react-native-util.git#ca462ffee4e2bbe6996d202fd7e1474eb28719db",
   "_shasum": "486b3a175fae953bf38677286528d9593c155f81",
   "_spec": "@ichong/react-native-util@git+https://gitee.com/petdoctor/react-native-util.git",
   "_where": "/Users/zhangzy/workspace/android/5ichong/academy",
