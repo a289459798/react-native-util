@@ -20,7 +20,7 @@
     "#USER",
     "/"
   ],
-  "_resolved": "git+https://gitee.com/petdoctor/react-native-util.git#bb1050547ebbc7f9b31fe23b5f7d48b572c5ab4d",
+  "_resolved": "git+https://gitee.com/petdoctor/react-native-util.git#1fb6aae167fc2cbd23b7e3e72606d0cc7bce8fd1",
   "_shasum": "486b3a175fae953bf38677286528d9593c155f81",
   "_spec": "@ichong/react-native-util@git+https://gitee.com/petdoctor/react-native-util.git",
   "_where": "/Users/zhangzy/workspace/android/5ichong/academy",
@@ -28,6 +28,10 @@
     "name": "zhangzy"
   },
   "bundleDependencies": false,
+  "dependencies": {
+    "@react-native-community/async-storage": "^1.6.3",
+    "@react-native-community/push-notification-ios": "^1.0.3"
+  },
   "deprecated": false,
   "description": "## Getting started",
   "homepage": "https://gitee.com/petdoctor/react-native-util.git#readme",
@@ -37,12 +41,10 @@
   "license": "ISC",
   "main": "index.js",
   "name": "@ichong/react-native-util",
-  "dependencies": {
-    "@react-native-community/async-storage": "^1.6.3"
-  },
   "peerDependencies": {
     "react-native": "^0.41.2",
-    "@react-native-community/async-storage": "^1.6.3"
+    "@react-native-community/async-storage": "^1.6.3",
+    "@react-native-community/push-notification-ios": "^1.0.3"
   },
   "repository": {
     "type": "git",
