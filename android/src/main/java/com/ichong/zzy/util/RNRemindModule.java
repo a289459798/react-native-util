@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.ApplicationInfo;
 import android.os.Build;
+import android.provider.Settings;
 import androidx.annotation.RequiresApi;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import com.facebook.react.bridge.Callback;
@@ -92,6 +93,12 @@ public class RNRemindModule extends ReactContextBaseJavaModule {
             e.printStackTrace();
         }
         callback.invoke(false);
+    }
+
+    @ReactMethod
+    public void openSetting() {
+
+        mContent.startActivity(new Intent(Settings.ACTION_SETTINGS));
     }
 
 
