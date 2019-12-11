@@ -34,7 +34,9 @@ public class RNRemindModule extends ReactContextBaseJavaModule {
     @Override
     public void onCatalystInstanceDestroy() {
         super.onCatalystInstanceDestroy();
-        mContent.unregisterReceiver(notifyReceiver);
+        if(notifyReceiver != null) {
+            mContent.unregisterReceiver(notifyReceiver);
+        }
     }
 
     @Override
