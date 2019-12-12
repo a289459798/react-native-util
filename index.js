@@ -3,6 +3,7 @@ import Encrpyt from './src/encrypt';
 import Update from './src/update';
 import Remind from './src/remind';
 import Event from './src/event';
+import Http from './src/client/http';
 
 export {
     QiNiu,
@@ -10,4 +11,5 @@ export {
     Update,
     Remind,
     Event,
+    Http,
 };
