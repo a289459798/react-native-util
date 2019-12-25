@@ -14,15 +14,22 @@ export default class Http {
         this.#headers = headers;
     }
 
-    execute(path: string, type = 'get', data = []): Promise<Response> {
+    execute(path: string, type = 'get', data): Promise<Response> {
         return new Promise((okCallback, errorCallback) => {
-            fetch(this.#api + path, {
+
+            let params = {
                 method: type.toLocaleUpperCase(),
                 headers: this.#headers,
-                body: JSON.stringify(data),
-            }).then((response) => {
+            };
+
+            if (data) {
+                params.body = data;
+            }
+
+            fetch(this.#api + path, params).then((response) => {
                 response.json().then((resData) => {
 
+                    console.log(121212)
                     if (response.ok) {
 
                         okCallback(resData);
