@@ -4,6 +4,7 @@ import Update from './src/update';
 import Remind from './src/remind';
 import Event from './src/event';
 import Http from './src/client/http';
+import Storage from './src/storage';
 
 export {
     QiNiu,
@@ -12,4 +13,5 @@ export {
     Remind,
     Event,
     Http,
+    Storage,
 };

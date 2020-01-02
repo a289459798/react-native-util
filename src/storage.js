@@ -19,7 +19,7 @@ export default {
 
     merge: (key, value) => {
         return AsyncStorage.mergeItem(key, value);
-    }
+    },
 
     delete: (key) => {
         return AsyncStorage.removeItem(key);

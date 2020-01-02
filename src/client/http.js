@@ -19,17 +19,15 @@ export default class Http {
 
             let params = {
                 method: type.toLocaleUpperCase(),
-                headers: this.#headers,
+                headers: {'Content-Type': 'application/json', ...this.#headers, ...this.getHeaders()},
             };
-
+            
             if (data) {
-                params.body = data;
+                params.body = JSON.stringify(data);
             }
 
             fetch(this.#api + path, params).then((response) => {
                 response.json().then((resData) => {
-
-                    console.log(121212)
                     if (response.ok) {
 
                         okCallback(resData);
