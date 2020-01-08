@@ -6,7 +6,7 @@ class EncryptManage {
 
     string2GBK(str, cb) {
 
-        Encryption.string2GBK(str, (data) => {
+        RNEncrypt.string2GBK(str, (data) => {
             cb && cb(data);
         });
     }
@@ -14,7 +14,7 @@ class EncryptManage {
     encode(str, key) {
 
         return new Promise(function (callback, errorCallback) {
-            Encryption.encode(str, key)
+            RNEncrypt.encode(str, key)
                 .then((data) => {
 
                     callback(data);
@@ -25,7 +25,7 @@ class EncryptManage {
     decode(str, key) {
 
         return new Promise(function (callback, errorCallback) {
-            Encryption.decode(str, key)
+            RNEncrypt.decode(str, key)
                 .then((data) => {
 
                     callback(data);
