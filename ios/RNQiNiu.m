@@ -29,6 +29,10 @@ RCT_REMAP_METHOD(upload,
     
     [images enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
         
+        if([obj isEqual:@""]) {
+            reject(@"999", @"上传图片不能为空", nil);
+            return;
+        }
         UIImage *image = [[UIImage alloc] initWithContentsOfFile:[obj objectForKey:@"uri"]];
         
         NSData *data;

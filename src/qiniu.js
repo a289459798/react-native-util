@@ -7,7 +7,7 @@ class QNManage {
     upload(files: Array, token, dir = '') {
 
         return new Promise(function (callback, errorCallback) {
-            QNManage.upload(files, token, dir)
+            RNQiNiu.upload(files, token, dir)
                 .then((data) => {
 
                     callback(data);
