@@ -27,7 +27,6 @@ class EncryptManage {
         return new Promise(function (callback, errorCallback) {
             RNEncrypt.decode(str, key)
                 .then((data) => {
-
                     callback(data);
                 }, (error) => {
 

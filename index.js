@@ -5,6 +5,7 @@ import Remind from './src/remind';
 import Event from './src/event';
 import Http from './src/client/http';
 import Storage from './src/storage';
+import Map from './src/map';
 
 export {
     QiNiu,
@@ -14,4 +15,5 @@ export {
     Event,
     Http,
     Storage,
+    Map
 };

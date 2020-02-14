@@ -5,6 +5,6 @@ export default {
         return NativeAppEventEmitter.emit(eventType, data);
     },
     addListener: (type: string, listener: (data: any) => void, context?: any) => {
-    return NativeAppEventEmitter.addListener(type, listener);
+        return NativeAppEventEmitter.addListener(type, listener);
     },
 };
