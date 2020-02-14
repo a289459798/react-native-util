@@ -6,7 +6,7 @@ class EncryptManage {
 
     string2GBK(str, cb) {
 
-        RNEncrypt.string2GBK(str, (data) => {
+        Encryption.string2GBK(str, (data) => {
             cb && cb(data);
         });
     }

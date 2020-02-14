@@ -1,6 +1,6 @@
 import {NativeModules, Linking, Alert, Platform} from 'react-native';
 
-const {RNRemind} = NativeModules;
+const {RNMap} = NativeModules;
 
 class Map {
 
@@ -21,26 +21,49 @@ class Map {
                         okCallback(items);
                     });
                 });
+            } else {
+                RNMap.checkInstall('com.autonavi.minimap', (res) => {
+                    if (res) {
+                        items.push({key: 'iosamap', name: '高德地图'});
+                    }
+                    RNMap.checkInstall('com.baidu.BaiduMap', (res) => {
+                        if (res) {
+                            items.push({key: 'baidumap', name: '百度地图'});
+                        }
+                        okCallback(items);
+                    });
+                });
+
             }
         });
 
     }
 
     openMap(key, address) {
-        if (Platform.OS == 'ios') {
-            switch (key) {
-                case 'iosmap':
-                    Linking.openURL(`http://maps.apple.com/?daddr=${address}`);
-                    break;
-                case 'iosamap':
-                    Linking.openURL(`iosamap://path?sname=我的位置&dname=${address}&dev=0&t=0&sid=BGVIS1&did=BGVIS2`);
-                    break;
-                case 'baidumap':
-                    Linking.openURL(`baidumap://map/direction?origin={{我的位置}}&destination=${address}`);
-                    break;
 
-            }
+        switch (key) {
+            case 'iosmap':
+                if (Platform.OS == 'ios') {
+                    Linking.openURL(`http://maps.apple.com/?daddr=${address}`);
+                }
+                break;
+            case 'iosamap':
+                if (Platform.OS == 'ios') {
+                    Linking.openURL(`iosamap://path?sname=我的位置&dname=${address}&dev=0&t=0&sid=BGVIS1&did=BGVIS2`);
+                } else {
+                    RNMap.open('gaode', address);
+                }
+                break;
+            case 'baidumap':
+                if (Platform.OS == 'ios') {
+                    Linking.openURL(`baidumap://map/direction?origin={{我的位置}}&destination=${address}`);
+                } else {
+                    RNMap.open('baidu', address);
+                }
+                break;
+
         }
+
     }
 };
 
