@@ -14,7 +14,7 @@ import com.facebook.react.bridge.JavaScriptModule;
 public class RNUtilPackage implements ReactPackage {
     @Override
     public List<NativeModule> createNativeModules(ReactApplicationContext reactContext) {
-        return Arrays.<NativeModule>asList(new RNUtilModule(reactContext), new RNQiNiuModule(reactContext), new RNRemindModule(reactContext), new RNUpdateModule(reactContext), new RNMapModule(reactContext));
+        return Arrays.<NativeModule>asList(new RNUtilModule(reactContext), new RNQiNiuModule(reactContext), new RNRemindModule(reactContext), new RNUpdateModule(reactContext), new RNMapModule(reactContext), new RNEncryptModule(reactContext));
     }
 
     // Deprecated from RN 0.47
