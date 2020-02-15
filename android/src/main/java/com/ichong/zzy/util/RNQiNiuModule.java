@@ -2,11 +2,9 @@
 package com.ichong.zzy.util;
 
 import com.facebook.react.bridge.*;
+import com.qiniu.android.common.Zone;
 import com.qiniu.android.http.ResponseInfo;
-import com.qiniu.android.storage.UpCancellationSignal;
-import com.qiniu.android.storage.UpCompletionHandler;
-import com.qiniu.android.storage.UploadManager;
-import com.qiniu.android.storage.UploadOptions;
+import com.qiniu.android.storage.*;
 import org.json.JSONObject;
 
 public class RNQiNiuModule extends ReactContextBaseJavaModule {
@@ -36,7 +34,10 @@ public class RNQiNiuModule extends ReactContextBaseJavaModule {
         successCount = 0;
         isCancelled = false;
         mCount = 0;
-        UploadManager uploadManager = new UploadManager();
+
+        Configuration configuration = new Configuration.Builder().zone(Zone.zone1).build();
+
+        UploadManager uploadManager = new UploadManager(configuration);
         ReadableMapKeySetIterator iter = files.keySetIterator();
         while (iter.hasNextKey()) {
             if (files.getMap(iter.nextKey()) != null) {
