@@ -6,6 +6,7 @@ import Event from './src/event';
 import Http from './src/client/http';
 import Storage from './src/storage';
 import Map from './src/map';
+import ICImagePicker from './src/imagePicker';
 
 export {
     QiNiu,
@@ -15,5 +16,6 @@ export {
     Event,
     Http,
     Storage,
-    Map
+    Map,
+    ICImagePicker,
 };
