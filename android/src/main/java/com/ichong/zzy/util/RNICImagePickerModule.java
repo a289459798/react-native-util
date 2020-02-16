@@ -59,7 +59,8 @@ public class RNICImagePickerModule extends ReactContextBaseJavaModule {
             .maxSelectNum(max)
             .selectionMedia(select)
             .selectionMode(max == 1 ? PictureConfig.SINGLE : PictureConfig.MULTIPLE)
-            .enableCrop(crop)
+            .isSingleDirectReturn(true)
+            .enableCrop(true)
             .isGif(false)
             .loadImageEngine(GlideEngine.createGlideEngine())
             .forResult(new OnResultCallbackListener() {
