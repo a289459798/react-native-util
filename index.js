@@ -7,6 +7,7 @@ import Http from './src/client/http';
 import Storage from './src/storage';
 import Map from './src/map';
 import ICImagePicker from './src/imagePicker';
+import ICFile from './src/file';
 
 export {
     QiNiu,
@@ -18,4 +19,5 @@ export {
     Storage,
     Map,
     ICImagePicker,
+    ICFile
 };
