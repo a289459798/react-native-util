@@ -9,6 +9,8 @@
 
 @implementation RNICImagePicker {
     NSMutableArray *_selectedAssets;
+    RCTPromiseResolveBlock _resolve;
+    RCTPromiseRejectBlock _reject;
 }
 
 - (dispatch_queue_t)methodQueue
@@ -102,6 +104,42 @@ RCT_EXPORT_METHOD(open:(NSDictionary *)params SelectedAssets:(NSArray *)selected
         BOOL res = [fileManager createDirectoryAtPath:path withIntermediateDirectories:YES attributes:nil error:nil];
         return res;
     } else return NO;
+}
+
+RCT_REMAP_METHOD(save,
+                 image: (NSString *)images
+                 resolver:(RCTPromiseResolveBlock)resolve
+                 rejecter:(RCTPromiseRejectBlock)reject)
+{
+
+    _resolve = resolve;
+    _reject = reject;
+    NSData *imageData;
+    if([images hasPrefix:@"http"]) {
+        imageData = [NSData dataWithContentsOfURL: [NSURL URLWithString:images]];
+    } else {
+        imageData = [[NSData alloc] initWithBase64EncodedString:images options:NSDataBase64DecodingIgnoreUnknownCharacters];
+    }
+    UIImage *image = [UIImage imageWithData:imageData];
+    UIImageWriteToSavedPhotosAlbum(image, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
+}
+
+
+- (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo {
+    if(error) {
+        if(_reject) {
+            if(error.code == -3310) {
+                _reject(@"999", @"没有权限", error);
+            } else {
+                _reject(@"999", error.domain, error);
+
+            }
+        }
+    } else {
+        if (_resolve) {
+            _resolve(@"成功");
+        }
+    }
 }
 
 @end

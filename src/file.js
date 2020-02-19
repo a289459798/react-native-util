@@ -3,15 +3,16 @@
  */
 'use strict';
 
-
+import {
+    Platform,
+} from 'react-native';
 import RNFS from 'react-native-fs';
-import DeviceInfo from 'react-native-device-info';
 
 class file {
 
     async download(dir = '', file, data) {
 
-        let path = RNFS.CachesDirectoryPath + '/' + DeviceInfo.getBundleId + '/' + dir;
+        let path = Platform.OS === 'ios' ? RNFS.LibraryDirectoryPath : RNFS.ExternalDirectoryPath + '/cache/' + dir;
         return await RNFS.exists(path).then(exists => {
             if (!exists) {
                 return RNFS.mkdir(path).then(() => {
@@ -33,32 +34,33 @@ class file {
     }
 
     exists(dir = '', file) {
-        return RNFS.exists(RNFS.CachesDirectoryPath + '/' + DeviceInfo.getBundleId + '/' + dir + '/' + file);
+        return RNFS.exists(Platform.OS === 'ios' ? RNFS.LibraryDirectoryPath : RNFS.ExternalDirectoryPath + '/cache/' + dir + '/' + file);
     }
 
-    async write(dir, file, data) {
-        let path = RNFS.CachesDirectoryPath + '/com.ichong.CloudMarket/' + dir;
+    async write(dir, file, data, encoding = 'utf8') {
+        let path = Platform.OS === 'ios' ? RNFS.LibraryDirectoryPath : RNFS.ExternalDirectoryPath + '/cache/' + dir;
+        console.log(path)
         return await RNFS.exists(path).then(exists => {
             if (!exists) {
                 return RNFS.mkdir(path).then(() => {
-                    return RNFS.writeFile(path + '/' + file, data);
+                    return RNFS.writeFile(path + '/' + file, data, encoding);
                 });
             }
 
-            return RNFS.writeFile(path + '/' + file, data);
+            return RNFS.writeFile(path + '/' + file, data, encoding);
         });
 
     }
 
     read(dir, file) {
-        return RNFS.readFile(RNFS.CachesDirectoryPath + '/' + DeviceInfo.getBundleId + '/' + dir + '/' + file);
+        return RNFS.readFile(Platform.OS === 'ios' ? RNFS.LibraryDirectoryPath : RNFS.ExternalDirectoryPath + '/cache/' + dir + '/' + file);
     }
 
     readDir(dir = '', isAbsolute = false) {
-        return RNFS.readDir(!isAbsolute ? RNFS.CachesDirectoryPath + '/' + DeviceInfo.getBundleId : dir);
+        return RNFS.readDir(!isAbsolute ? Platform.OS === 'ios' ? RNFS.LibraryDirectoryPath : RNFS.ExternalDirectoryPath + '/cache/' : dir);
     }
 
-    unlink(path = RNFS.CachesDirectoryPath + '/' + DeviceInfo.getBundleId) {
+    unlink(path = Platform.OS === 'ios' ? RNFS.LibraryDirectoryPath : RNFS.ExternalDirectoryPath + '/cache/') {
         return RNFS.unlink(path);
     }
 

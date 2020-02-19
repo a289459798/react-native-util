@@ -14,7 +14,7 @@ class ICImagePicker {
 
     save(url) {
         if (Platform.OS == 'ios') {
-            return CameraRoll.saveToCameraRoll(url, 'photo');
+            return RNICImagePicker.save(url);
         } else {
             return new Promise((callback, errorCallback) => {
                 PermissionsAndroid.check(PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE).then((res) => {
