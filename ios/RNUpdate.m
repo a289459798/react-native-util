@@ -60,6 +60,8 @@ RCT_REMAP_METHOD(check,
                 } else {
                     reject(@"999", @"当前是最新版", nil);
                 }
+            } else {
+                reject(@"999", @"当前是最新版", nil);
             }
             
         } else {
