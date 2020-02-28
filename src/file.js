@@ -12,16 +12,20 @@ class file {
 
     async download(dir = '', file, data) {
 
-        let path = Platform.OS === 'ios' ? RNFS.LibraryDirectoryPath : RNFS.ExternalDirectoryPath + '/cache/' + dir;
+        let path = this.getCachePath() + dir;
         return await RNFS.exists(path).then(exists => {
             if (!exists) {
                 return RNFS.mkdir(path).then(() => {
-                    return this._download(path + '/' + file, data);
+                    return this._download(path + file, data);
                 });
             }
 
-            return this._download(path + '/' + file, data);
+            return this._download(path + file, data);
         });
+    }
+
+    getCachePath() {
+        return Platform.OS === 'ios' ? RNFS.LibraryDirectoryPath + '/Caches/' : RNFS.ExternalDirectoryPath;
     }
 
     _download(path, data) {
@@ -34,33 +38,33 @@ class file {
     }
 
     exists(dir = '', file) {
-        return RNFS.exists(Platform.OS === 'ios' ? RNFS.LibraryDirectoryPath : RNFS.ExternalDirectoryPath + '/cache/' + dir + '/' + file);
+        return RNFS.exists(this.getCachePath() + dir + '/' + file);
     }
 
     async write(dir, file, data, encoding = 'utf8') {
-        let path = Platform.OS === 'ios' ? RNFS.LibraryDirectoryPath : RNFS.ExternalDirectoryPath + '/cache/' + dir;
-        console.log(path)
+        let path = this.getCachePath() + dir;
+        console.log(path);
         return await RNFS.exists(path).then(exists => {
             if (!exists) {
                 return RNFS.mkdir(path).then(() => {
-                    return RNFS.writeFile(path + '/' + file, data, encoding);
+                    return RNFS.writeFile(path + file, data, encoding);
                 });
             }
 
-            return RNFS.writeFile(path + '/' + file, data, encoding);
+            return RNFS.writeFile(path + file, data, encoding);
         });
 
     }
 
     read(dir, file) {
-        return RNFS.readFile(Platform.OS === 'ios' ? RNFS.LibraryDirectoryPath : RNFS.ExternalDirectoryPath + '/cache/' + dir + '/' + file);
+        return RNFS.readFile(this.getCachePath() + dir + '/' + file);
     }
 
     readDir(dir = '', isAbsolute = false) {
-        return RNFS.readDir(!isAbsolute ? Platform.OS === 'ios' ? RNFS.LibraryDirectoryPath : RNFS.ExternalDirectoryPath + '/cache/' : dir);
+        return RNFS.readDir(!isAbsolute ? this.getCachePath() + dir : dir);
     }
 
-    unlink(path = Platform.OS === 'ios' ? RNFS.LibraryDirectoryPath : RNFS.ExternalDirectoryPath + '/cache/') {
+    unlink(path) {
         return RNFS.unlink(path);
     }
 
