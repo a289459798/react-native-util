@@ -33,15 +33,7 @@ RCT_REMAP_METHOD(upload,
             reject(@"999", @"上传图片不能为空", nil);
             return;
         }
-        UIImage *image = [[UIImage alloc] initWithContentsOfFile:[obj objectForKey:@"uri"]];
-        
-        NSData *data;
-        if (UIImagePNGRepresentation(image) == nil) {
-            data = UIImageJPEGRepresentation(image, 0.6);
-        } else {
-            data = UIImagePNGRepresentation(image);
-        }
-        
+        NSData *data = [NSData dataWithContentsOfFile:[obj objectForKey:@"uri"]];
         [self uploadForQiniu:data key:[NSString stringWithFormat:@"%@%@%d", dir, [NSString stringWithFormat:@"%.f", [[NSDate date] timeIntervalSince1970]*1000], (int)(10000 + (arc4random() % 90000))] token:token success:^(id responseObject) {
             
             successCount++;
