@@ -54,14 +54,62 @@ RCT_EXPORT_METHOD(open:(NSDictionary *)params SelectedAssets:(NSArray *)selected
         self->_selectedAssets = [[NSMutableArray alloc] initWithArray:assets];
         NSMutableArray *photoList = [NSMutableArray array];
         [assets enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-            NSDictionary *photoDict = [self handleCropImage:photos[idx] phAsset:obj quality:quality base64:params[@"base64"]];
-            [photoList addObject:photoDict];
+            if(isSelectOriginalPhoto) {
+                
+                [[TZImageManager manager] requestImageDataForAsset:obj completion:^(NSData *imageData, NSString *dataUTI, UIImageOrientation orientation, NSDictionary *info) {
+                   [photoList addObject:[self handleOriginalPhotoData:imageData phAsset:obj quality:quality base64:params[@"base64"]]];
+                   if ([photoList count] == [assets count]) {
+                       callback(@[photoList]);
+                   }
+                } progressHandler:^(double progress, NSError *error, BOOL *stop, NSDictionary *info) {
+
+                }];
+                
+            } else {
+                [photoList addObject:[self handleCropImage:photos[idx] phAsset:obj quality:quality base64:params[@"base64"]]];
+                if ([photoList count] == [assets count]) {
+                    callback(@[photoList]);
+                }
+            }
+            
         }];
-        if(callback) {
-            callback(@[photoList]);
-        }
     }];
     [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:imagePickerVc animated:YES completion:nil];
+}
+
+- (NSDictionary *)handleOriginalPhotoData:(NSData *)data phAsset:(PHAsset *)phAsset quality:(CGFloat)quality base64:(BOOL)base64{
+    [self createDir];
+
+    NSMutableDictionary *photo  = [NSMutableDictionary dictionary];
+    NSString *filename = [NSString stringWithFormat:@"%@%@", [[NSUUID UUID] UUIDString], [phAsset valueForKey:@"filename"]];
+    NSString *fileExtension    = [filename pathExtension];
+    UIImage *image = nil;
+    NSData *writeData = nil;
+    NSMutableString *filePath = [NSMutableString string];
+
+    BOOL isPNG = [fileExtension hasSuffix:@"PNG"] || [fileExtension hasSuffix:@"png"];
+    
+    writeData = data;
+
+    if (isPNG) {
+        [filePath appendString:[NSString stringWithFormat:@"%@ICImageCaches/%@", NSTemporaryDirectory(), filename]];
+    } else {
+        [filePath appendString:[NSString stringWithFormat:@"%@ICImageCaches/%@.jpg", NSTemporaryDirectory(), [filename stringByDeletingPathExtension]]];
+    }
+
+    [writeData writeToFile:filePath atomically:YES];
+
+    photo[@"uri"]       = filePath;
+    photo[@"width"]     = @(image.size.width);
+    photo[@"height"]    = @(image.size.height);
+    NSInteger size      = [[NSFileManager defaultManager] attributesOfItemAtPath:filePath error:nil].fileSize;
+    photo[@"size"]      = @(size);
+    photo[@"mediaType"] = @(phAsset.mediaType);
+    if (base64) {
+        photo[@"base64"] = [NSString stringWithFormat:@"data:image/jpeg;base64,%@", [writeData base64EncodedStringWithOptions:0]];
+    }
+
+    return photo;
 }
 
 - (NSDictionary *)handleCropImage:(UIImage *)image phAsset:(PHAsset *)phAsset quality:(CGFloat)quality base64:(BOOL)base64 {
