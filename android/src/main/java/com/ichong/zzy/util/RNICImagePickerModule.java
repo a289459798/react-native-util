@@ -70,7 +70,7 @@ public class RNICImagePickerModule extends ReactContextBaseJavaModule {
                     WritableArray list = Arguments.createArray();
                     for (int i = 0; i < result.size(); i++) {
                         WritableMap map = Arguments.createMap();
-                        String path = result.get(i).getPath();
+                        String path = result.get(i).getRealPath();
                         if (finalCrop) {
                             path = result.get(i).getCutPath();
                         }
