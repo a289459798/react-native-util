@@ -38,6 +38,7 @@ public class RNICImagePickerModule extends ReactContextBaseJavaModule {
         if (params.getInt("max") > 0) {
             max = params.getInt("max");
         }
+
         boolean crop = false;
         if (params.hasKey("crop")) {
             crop = params.getBoolean("crop");
@@ -62,6 +63,7 @@ public class RNICImagePickerModule extends ReactContextBaseJavaModule {
             .isSingleDirectReturn(true)
             .enableCrop(crop)
             .isGif(false)
+            .compress(true)
             .loadImageEngine(GlideEngine.createGlideEngine())
             .forResult(new OnResultCallbackListener() {
                 @Override
@@ -93,6 +95,11 @@ public class RNICImagePickerModule extends ReactContextBaseJavaModule {
                     if (callback != null) {
                         callback.invoke(list);
                     }
+                }
+
+                @Override
+                public void onCancel() {
+
                 }
             });
 
