@@ -62,7 +62,7 @@ public class RNMapModule extends ReactContextBaseJavaModule {
                 mContent.startActivity(intent);
                 break;
             case "baidu":
-                intent.setData(Uri.parse("baidumap://map/direction?origin=我的位置&destination=name:"
+                intent.setData(Uri.parse("baidumap://map/direction?origin=我的位置&destination="
                     + address
                     + "&mode=transit&sy=3&index=0&target=1"));
                 mContent.startActivity(intent);
