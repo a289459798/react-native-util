@@ -21,12 +21,12 @@ export default class Http {
                 method: type.toLocaleUpperCase(),
                 headers: {'Content-Type': 'application/json', ...this.#headers, ...this.getHeaders()},
             };
-            
+
             if (data) {
                 params.body = JSON.stringify(data);
             }
 
-            fetch(this.#api + path, params).then((response) => {
+            fetch(path, params).then((response) => {
                 response.json().then((resData) => {
                     if (response.ok) {
 
@@ -56,19 +56,23 @@ export default class Http {
         });
     }
 
+    get(path: string, isAbs = false): Promise<Response> {
+        return this.execute(isAbs ? path : this.#api + path);
+    }
+
     get(path: string): Promise<Response> {
-        return this.execute(path);
+        return this.execute(this.#api + path);
     }
 
     post(path: string, data): Promise<Response> {
-        return this.execute(path, 'post', data);
+        return this.execute(this.#api + path, 'post', data);
     }
 
     put(path: string, data): Promise<Response> {
-        return this.execute(path, 'put', data);
+        return this.execute(this.#api + path, 'put', data);
     }
 
     delete(path: string): Promise<Response> {
-        return this.execute(path, 'delete');
+        return this.execute(this.#api + path, 'delete');
     }
 }
