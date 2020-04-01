@@ -60,10 +60,6 @@ export default class Http {
         return this.execute(isAbs ? path : this.#api + path);
     }
 
-    get(path: string): Promise<Response> {
-        return this.execute(this.#api + path);
-    }
-
     post(path: string, data): Promise<Response> {
         return this.execute(this.#api + path, 'post', data);
     }
