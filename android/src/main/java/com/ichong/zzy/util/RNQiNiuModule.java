@@ -27,7 +27,7 @@ public class RNQiNiuModule extends ReactContextBaseJavaModule {
     private int mCount = 0;
 
     @ReactMethod
-    public void upload(final ReadableMap files, String token, String dir,
+    public void upload(final ReadableMap files, String token, String dir, String zone,
                        final Promise promise) {
 
         imagePaths = Arguments.createMap();
@@ -35,7 +35,13 @@ public class RNQiNiuModule extends ReactContextBaseJavaModule {
         isCancelled = false;
         mCount = 0;
 
-        Configuration configuration = new Configuration.Builder().zone(Zone.zone1).build();
+        Zone uploadZone = Zone.zone0;
+
+        if ("zone1".equals(zone)) {
+            uploadZone = Zone.zone1;
+        }
+
+        Configuration configuration = new Configuration.Builder().zone(uploadZone).build();
 
         UploadManager uploadManager = new UploadManager(configuration);
         ReadableMapKeySetIterator iter = files.keySetIterator();

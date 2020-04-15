@@ -1,20 +1,28 @@
-import {NativeModules} from 'react-native';
+import {NativeModules, Platform} from 'react-native';
 
 const {RNQiNiu} = NativeModules;
 
 class QNManage {
 
-    upload(files: Array, token, dir = '') {
+    upload(files: Array, token, dir = '', zone = 'zone0') {
 
         return new Promise(function (callback, errorCallback) {
-            RNQiNiu.upload(files, token, dir)
-                .then((data) => {
+            if (Platform.OS == 'ios') {
+                RNQiNiu.upload(files, token, dir)
+                    .then((data) => {
+                        callback(data);
+                    }, (error) => {
+                        errorCallback({message: '上传失败'});
+                    });
+            } else {
+                RNQiNiu.upload(files, token, dir, zone)
+                    .then((data) => {
+                        callback(data);
+                    }, (error) => {
+                        errorCallback({message: '上传失败'});
+                    });
+            }
 
-                    callback(data);
-                }, (error) => {
-
-                    errorCallback('上传失败');
-                });
         });
     }
 }

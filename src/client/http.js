@@ -30,7 +30,7 @@ export default class Http {
                 response.json().then((resData) => {
                     if (response.ok) {
 
-                        okCallback(resData);
+                        okCallback && okCallback(resData);
                     } else {
 
                         if (resData.status == 401 || resData.status == 403) {
@@ -40,6 +40,7 @@ export default class Http {
                                 Event.emit(Http.NO_ACCESS);
                             }
                         }
+
                         errorCallback && errorCallback({
                             code: resData.status,
                             message: resData.message ? resData.message : '服务器开了个小差',
