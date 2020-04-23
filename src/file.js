@@ -12,7 +12,7 @@ class file {
 
     async download(dir = '', file, data) {
 
-        let path = this.getCachePath() + dir;
+        let path = this.getCachePath() + dir + '/';
         return await RNFS.exists(path).then(exists => {
             if (!exists) {
                 return RNFS.mkdir(path).then(() => {
@@ -25,7 +25,7 @@ class file {
     }
 
     getCachePath() {
-        return Platform.OS === 'ios' ? RNFS.LibraryDirectoryPath + '/Caches/' : RNFS.ExternalDirectoryPath;
+        return Platform.OS === 'ios' ? RNFS.LibraryDirectoryPath + '/Caches/' : RNFS.ExternalDirectoryPath + '/';
     }
 
     _download(path, data) {
@@ -42,15 +42,14 @@ class file {
     }
 
     async write(dir, file, data, encoding = 'utf8') {
-        let path = this.getCachePath() + dir;
-        console.log(path);
+        let path = this.getCachePath() + dir + '/';
         return await RNFS.exists(path).then(exists => {
             if (!exists) {
                 return RNFS.mkdir(path).then(() => {
                     return RNFS.writeFile(path + file, data, encoding);
                 });
             }
-
+            console.log(path + file);
             return RNFS.writeFile(path + file, data, encoding);
         });
 
