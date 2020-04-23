@@ -44,7 +44,7 @@ class ICImagePicker {
     _saveWithAndroid(url, callback, errorCallback) {
         if (url.indexOf('http') == 0) {
             file.download('share', 'share.png', url).then((res) => {
-                CameraRoll.saveToCameraRoll('file://' + RNFS.ExternalDirectoryPath + '/cache/share/share.png').then(() => {
+                CameraRoll.saveToCameraRoll('file://' + RNFS.ExternalDirectoryPath + '/share/share.png').then(() => {
                     callback();
                 }, error => {
                     errorCallback(error);
@@ -54,7 +54,7 @@ class ICImagePicker {
             });
         } else {
             file.write('share', 'share.png', url, 'base64').then((res) => {
-                CameraRoll.saveToCameraRoll('file://' + RNFS.ExternalDirectoryPath + '/cache/share/share.png').then(() => {
+                CameraRoll.saveToCameraRoll('file://' + RNFS.ExternalDirectoryPath + '/share/share.png').then(() => {
                     callback();
                 }, error => {
                     errorCallback(error);
