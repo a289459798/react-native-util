@@ -39,6 +39,7 @@ export default class Http {
                             } else {
                                 Event.emit(Http.NO_ACCESS);
                             }
+                            return;
                         }
 
                         errorCallback && errorCallback({

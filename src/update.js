@@ -4,7 +4,7 @@ const {RNUpdate} = NativeModules;
 
 class UpdateManage {
 
-    check(showDialog, appid) {
+    check(showDialog =  false, appid) {
         if (Platform.OS == 'ios') {
             return RNUpdate.check(appid, showDialog);
         } else {
