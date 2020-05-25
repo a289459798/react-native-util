@@ -7,9 +7,6 @@ export default class Http {
     #headers;
 
     constructor(api = '', headers = []) {
-        if (new.target === Http) {
-            throw new Error('本类不能实例化');
-        }
         this.#api = api;
         this.#headers = headers;
     }
