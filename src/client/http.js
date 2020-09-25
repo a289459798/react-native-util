@@ -1,4 +1,5 @@
 import Event from '../event';
+import EncryptManage from '../encrypt';
 
 export default class Http {
 
@@ -9,6 +10,10 @@ export default class Http {
     constructor(api = '', headers = []) {
         this.#api = api;
         this.#headers = headers;
+    }
+
+    getKey() {
+        return '';
     }
 
     execute(path: string, type = 'get', data): Promise<Response> {
@@ -27,7 +32,14 @@ export default class Http {
                 response.json().then((resData) => {
                     if (response.ok) {
 
-                        okCallback && okCallback(resData);
+                        if (resData.encrypt) {
+                            EncryptManage.decode(resData.data, this.getKey()).then(str => {
+                                resData.data = JSON.parse(str);
+                                okCallback && okCallback(resData);
+                            });
+                        } else {
+                            okCallback && okCallback(resData);
+                        }
                     } else {
 
                         if (resData.status == 401 || resData.status == 403) {
