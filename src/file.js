@@ -34,7 +34,7 @@ class file {
             toFile: path,
             background: true,
         };
-        return RNFS.downloadFile(options);
+        return RNFS.downloadFile(options).promise;
     }
 
     exists(dir = '', file) {
