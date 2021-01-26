@@ -24,9 +24,8 @@ RCT_EXPORT_METHOD(open:(NSDictionary *)params SelectedAssets:(NSArray *)selected
 
     int max = 1;
     float quality = 1.0;
-    BOOL crop = NO;
-    float cropWidth = 100;
-    float cropHeight = 100;
+    float cropWidth = 200;
+    float cropHeight = 200;
 
     CGRect rect = [[UIScreen mainScreen] bounds];
     CGSize size = rect.size;
@@ -41,10 +40,6 @@ RCT_EXPORT_METHOD(open:(NSDictionary *)params SelectedAssets:(NSArray *)selected
         quality = [params[@"quality"] floatValue];
     }
 
-    if(params[@"crop"]) {
-        crop = YES;
-    }
-
     if(params[@"cropWidth"]) {
         cropWidth = [params[@"cropWidth"] floatValue];
     }
@@ -55,7 +50,7 @@ RCT_EXPORT_METHOD(open:(NSDictionary *)params SelectedAssets:(NSArray *)selected
 
     TZImagePickerController *imagePickerVc = [[TZImagePickerController alloc] initWithMaxImagesCount:max delegate:nil];
 
-    imagePickerVc.allowCrop = crop;
+    imagePickerVc.allowCrop = params[@"crop"] || NO;
     imagePickerVc.allowPickingGif = NO;
     imagePickerVc.allowPickingVideo = NO;
 
