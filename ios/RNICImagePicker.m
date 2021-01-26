@@ -24,20 +24,45 @@ RCT_EXPORT_METHOD(open:(NSDictionary *)params SelectedAssets:(NSArray *)selected
 
     int max = 1;
     float quality = 1.0;
-    
+    BOOL crop = NO;
+    float cropWidth = 100;
+    float cropHeight = 100;
+
+    CGRect rect = [[UIScreen mainScreen] bounds];
+    CGSize size = rect.size;
+    CGFloat width = size.width;
+    CGFloat height = size.height;
+
     if(params[@"max"]) {
         max = [params[@"max"] intValue];
     }
-    
+
     if(params[@"quality"]) {
         quality = [params[@"quality"] floatValue];
     }
-    
+
+    if(params[@"crop"]) {
+        crop = YES;
+    }
+
+    if(params[@"cropWidth"]) {
+        cropWidth = [params[@"cropWidth"] floatValue];
+    }
+
+    if(params[@"cropHeight"]) {
+        cropHeight = [params[@"cropHeight"] floatValue];
+    }
+
     TZImagePickerController *imagePickerVc = [[TZImagePickerController alloc] initWithMaxImagesCount:max delegate:nil];
 
-    imagePickerVc.allowCrop = params[@"crop"];
+    imagePickerVc.allowCrop = crop;
     imagePickerVc.allowPickingGif = NO;
     imagePickerVc.allowPickingVideo = NO;
+
+    if(params[@"cropWidth"] && params[@"cropHeight"]) {
+        imagePickerVc.cropRect = CGRectMake((width - cropWidth)/2, (height - cropHeight)/2, cropWidth, cropHeight);
+    }
+
     if(selectedAssets && self->_selectedAssets) {
         [selectedAssets enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             NSLog(@"dd:%@", obj);
@@ -55,7 +80,7 @@ RCT_EXPORT_METHOD(open:(NSDictionary *)params SelectedAssets:(NSArray *)selected
         NSMutableArray *photoList = [NSMutableArray array];
         [assets enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             if(isSelectOriginalPhoto) {
-                
+
                 [[TZImageManager manager] requestImageDataForAsset:obj completion:^(NSData *imageData, NSString *dataUTI, UIImageOrientation orientation, NSDictionary *info) {
                    [photoList addObject:[self handleOriginalPhotoData:imageData phAsset:obj quality:quality base64:params[@"base64"]]];
                    if ([photoList count] == [assets count]) {
@@ -64,14 +89,14 @@ RCT_EXPORT_METHOD(open:(NSDictionary *)params SelectedAssets:(NSArray *)selected
                 } progressHandler:^(double progress, NSError *error, BOOL *stop, NSDictionary *info) {
 
                 }];
-                
+
             } else {
                 [photoList addObject:[self handleCropImage:photos[idx] phAsset:obj quality:quality base64:params[@"base64"]]];
                 if ([photoList count] == [assets count]) {
                     callback(@[photoList]);
                 }
             }
-            
+
         }];
     }];
     [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:imagePickerVc animated:YES completion:nil];
@@ -88,7 +113,7 @@ RCT_EXPORT_METHOD(open:(NSDictionary *)params SelectedAssets:(NSArray *)selected
     NSMutableString *filePath = [NSMutableString string];
 
     BOOL isPNG = [fileExtension hasSuffix:@"PNG"] || [fileExtension hasSuffix:@"png"];
-    
+
     writeData = data;
 
     if (isPNG) {
