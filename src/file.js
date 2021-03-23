@@ -11,7 +11,6 @@ import RNFS from 'react-native-fs';
 class file {
 
     async download(dir = '', file, data) {
-
         let path = this.getCachePath() + dir + '/';
         return await RNFS.exists(path).then(exists => {
             if (!exists) {
@@ -19,7 +18,6 @@ class file {
                     return this._download(path + file, data);
                 });
             }
-
             return this._download(path + file, data);
         });
     }
@@ -49,10 +47,8 @@ class file {
                     return RNFS.writeFile(path + file, data, encoding);
                 });
             }
-            console.log(path + file);
             return RNFS.writeFile(path + file, data, encoding);
         });
-
     }
 
     read(dir, file) {

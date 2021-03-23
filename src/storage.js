@@ -28,4 +28,5 @@ export default {
     clear: () => {
         return AsyncStorage.clear();
     },
+
 };
