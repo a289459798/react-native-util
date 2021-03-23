@@ -51,6 +51,7 @@ public class RNQiNiuModule extends ReactContextBaseJavaModule {
             }
         }
         if (mCount > 0) {
+            int i = 0;
             iter = files.keySetIterator();
             while (iter.hasNextKey()) {
                 final String k = iter.nextKey();
@@ -59,7 +60,7 @@ public class RNQiNiuModule extends ReactContextBaseJavaModule {
                     continue;
                 }
                 String data = fileObj.getString("uri").replace("file://", "");
-                String key = String.format("%s%s%s.jpg", dir, System.currentTimeMillis() + "", "34563");
+                String key = String.format("%s%s%s.jpg", dir, System.currentTimeMillis() + (i++) + "", "34563");
                 uploadManager.put(data, key, token,
                     new UpCompletionHandler() {
                         @Override
