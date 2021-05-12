@@ -8,7 +8,7 @@ class Remind {
     notify(title, time, userInfo = {}) {
         this.notifyEnabled((state) => {
             if (state) {
-                if (Platform.OS == 'ios') {
+                if (Platform.OS === 'ios') {
                     PushNotificationIOS.scheduleLocalNotification({
                         alertBody: title,
                         alertAction: '查看',
@@ -22,16 +22,15 @@ class Remind {
                 this.openSetting();
             }
         });
-
     }
 
-    notifyEnabled(cb) {
-        if (Platform.OS == 'ios') {
+    notifyEnabled(callback) {
+        if (Platform.OS === 'ios') {
             PushNotificationIOS.checkPermissions((data) => {
-                cb && cb(data.alert);
+                callback && callback(data.alert);
             });
         } else {
-            RNRemind.notifyEnabled(cb);
+            RNRemind.notifyEnabled(callback);
         }
     }
 
@@ -43,7 +42,7 @@ class Remind {
             },
             {
                 text: '确定', onPress: () => {
-                    if (Platform.OS == 'ios') {
+                    if (Platform.OS === 'ios') {
                         Linking.openURL('app-settings:');
                     } else {
                         RNRemind.openSetting();
@@ -52,6 +51,7 @@ class Remind {
             },
         ]);
     }
-};
+
+}
 
 export default new Remind();

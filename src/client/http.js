@@ -18,20 +18,16 @@ export default class Http {
 
     execute(path: string, type = 'get', data): Promise<Response> {
         return new Promise((okCallback, errorCallback) => {
-
             let params = {
                 method: type.toLocaleUpperCase(),
                 headers: {'Content-Type': 'application/json', ...this.#headers, ...this.getHeaders()},
             };
-
             if (data) {
                 params.body = JSON.stringify(data);
             }
-
             fetch(path, params).then((response) => {
                 response.json().then((resData) => {
                     if (response.ok) {
-
                         if (resData.encrypt) {
                             EncryptManage.decode(resData.data, this.getKey()).then(str => {
                                 resData.data = JSON.parse(str);
@@ -41,7 +37,6 @@ export default class Http {
                             okCallback && okCallback(resData);
                         }
                     } else {
-
                         if (resData.status == 401 || resData.status == 403) {
                             if (this.noAccess) {
                                 this.noAccess(resData.status);
@@ -50,13 +45,11 @@ export default class Http {
                             }
                             return;
                         }
-
                         errorCallback && errorCallback({
                             code: resData.status,
                             message: resData.message ? resData.message : '服务器开了个小差',
                         });
                     }
-
                 }).catch((error) => {
                     errorCallback && errorCallback({code: 500, message: '服务器开了个小差'});
                     return;
@@ -82,4 +75,5 @@ export default class Http {
     delete(path: string): Promise<Response> {
         return this.execute(this.#api + path, 'delete');
     }
+
 }

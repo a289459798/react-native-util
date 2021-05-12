@@ -7,13 +7,12 @@ const {RNICImagePicker} = NativeModules;
 
 class ICImagePicker {
 
-    open(params = {}, select = [], callback = () => {
-    }) {
+    open(params = {}, select = [], callback) {
         RNICImagePicker.open(params, select, callback);
     }
 
     save(url) {
-        if (Platform.OS == 'ios') {
+        if (Platform.OS === 'ios') {
             return RNICImagePicker.save(url);
         } else {
             return new Promise((callback, errorCallback) => {
@@ -42,7 +41,7 @@ class ICImagePicker {
     }
 
     _saveWithAndroid(url, callback, errorCallback) {
-        if (url.indexOf('http') == 0) {
+        if (url.indexOf('http') === 0) {
             file.download('share', 'share.png', url).then((res) => {
                 setTimeout(() => {
                     CameraRoll.saveToCameraRoll('file://' + RNFS.ExternalDirectoryPath + '/share/share.png').then(() => {
@@ -65,8 +64,8 @@ class ICImagePicker {
                 errorCallback(error);
             });
         }
-
     }
+
 }
 
 export default new ICImagePicker();

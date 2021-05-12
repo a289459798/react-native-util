@@ -4,9 +4,9 @@ const {RNEncrypt} = NativeModules;
 
 class EncryptManage {
 
-    string2GBK(str, cb) {
+    string2GBK(str, callback) {
         RNEncrypt.string2GBK(str, (data) => {
-            cb && cb(data);
+            callback && callback(data);
         });
     }
 
@@ -27,7 +27,7 @@ class EncryptManage {
             });
         });
     }
+
 }
 
-let Encrypt = new EncryptManage();
-export default Encrypt;
+export default new EncryptManage();
