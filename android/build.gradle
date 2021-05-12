@@ -35,10 +35,9 @@ repositories {
 
 dependencies {
     implementation 'com.facebook.react:react-native:+'
-    implementation 'com.qiniu:qiniu-android-sdk:7.2.+'
+    implementation 'com.qiniu:qiniu-android-sdk:7.4.6'
     implementation 'com.tencent.bugly:crashreport_upgrade:latest.release'
     implementation 'com.tencent.bugly:nativecrashreport:latest.release'
     implementation 'com.github.LuckSiege.PictureSelector:picture_library:v2.4.9'
     implementation 'com.github.bumptech.glide:glide:4.9.0'
 }
-  

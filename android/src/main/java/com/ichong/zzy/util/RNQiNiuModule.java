@@ -2,6 +2,7 @@
 package com.ichong.zzy.util;
 
 import com.facebook.react.bridge.*;
+import com.qiniu.android.common.FixedZone;
 import com.qiniu.android.common.Zone;
 import com.qiniu.android.http.ResponseInfo;
 import com.qiniu.android.storage.*;
@@ -35,10 +36,10 @@ public class RNQiNiuModule extends ReactContextBaseJavaModule {
         isCancelled = false;
         mCount = 0;
 
-        Zone uploadZone = Zone.zone0;
+        Zone uploadZone = FixedZone.zone0;
 
         if ("zone1".equals(zone)) {
-            uploadZone = Zone.zone1;
+            uploadZone = FixedZone.zone1;
         }
 
         Configuration configuration = new Configuration.Builder().zone(uploadZone).build();
@@ -51,6 +52,7 @@ public class RNQiNiuModule extends ReactContextBaseJavaModule {
             }
         }
         if (mCount > 0) {
+            int i = 0;
             iter = files.keySetIterator();
             while (iter.hasNextKey()) {
                 final String k = iter.nextKey();
@@ -59,7 +61,7 @@ public class RNQiNiuModule extends ReactContextBaseJavaModule {
                     continue;
                 }
                 String data = fileObj.getString("uri").replace("file://", "");
-                String key = String.format("%s%s%s.jpg", dir, System.currentTimeMillis() + "", "34563");
+                String key = String.format("%s%s%s.jpg", dir, System.currentTimeMillis() + (i++) + "", "34563");
                 uploadManager.put(data, key, token,
                     new UpCompletionHandler() {
                         @Override
@@ -82,6 +84,7 @@ public class RNQiNiuModule extends ReactContextBaseJavaModule {
                         }
                     }, new UploadOptions(null, null, false, null,
                         new UpCancellationSignal() {
+                            @Override
                             public boolean isCancelled() {
                                 return isCancelled;
                             }
