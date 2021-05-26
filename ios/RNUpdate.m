@@ -35,9 +35,14 @@ RCT_REMAP_METHOD(check,
 
             NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
 
+            NSInteger versionCode = [[version stringByReplacingOccurrencesOfString:@"." withString:@""] integerValue];
+            if(versionCode < 10000) {
+                versionCode *= 10;
+            }
+
             NSArray *arr = [jsonDict objectForKey:@"results"];
             if([arr count] > 0) {
-                if([[version stringByReplacingOccurrencesOfString:@"." withString:@""] integerValue] < [[[arr[0] objectForKey:@"version"] stringByReplacingOccurrencesOfString:@"." withString:@""] integerValue]) {
+                if(versionCode < [[[arr[0] objectForKey:@"version"] stringByReplacingOccurrencesOfString:@"." withString:@""] integerValue]) {
 
                     if (show) {
                         dispatch_async(dispatch_get_main_queue(), ^{
