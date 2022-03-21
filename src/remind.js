@@ -24,6 +24,14 @@ class Remind {
         });
     }
 
+    delNotify(time, userInfo = {}) {
+        if (Platform.OS === 'ios') {
+            PushNotificationIOS.cancelLocalNotifications({content: JSON.stringify(userInfo)});
+        } else {
+            RNRemind.cancelNotify(time);
+        }
+    }
+
     notifyEnabled(callback) {
         if (Platform.OS === 'ios') {
             PushNotificationIOS.checkPermissions((data) => {
@@ -35,7 +43,7 @@ class Remind {
     }
 
     openSetting() {
-        Alert.alert('提示', '需要开启推送功能', [
+        Alert.alert('提示', '需要开启/关闭推送功能', [
             {
                 text: '取消', onPress: () => {
                 }, style: 'cancel',

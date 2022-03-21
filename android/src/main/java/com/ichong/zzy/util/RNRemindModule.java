@@ -56,9 +56,20 @@ public class RNRemindModule extends ReactContextBaseJavaModule {
         }
         Intent intent = new Intent(receiverName);
         intent.putExtra("title", title);
-        PendingIntent pi = PendingIntent.getBroadcast(mContent, 0, intent, 0);
+        int requestCode = (int)time / 1000;
+        PendingIntent pi = PendingIntent.getBroadcast(mContent, requestCode, intent, 0);
         AlarmManager am = (AlarmManager) mContent.getSystemService(Context.ALARM_SERVICE);
         am.set(AlarmManager.RTC_WAKEUP, (long) time, pi);
+    }
+
+    @ReactMethod
+    public void cancelNotify(final double time) {
+
+        Intent intent = new Intent(mContent, NotifyReceiver.class);
+        int requestCode = (int)time / 1000;
+        PendingIntent pi = PendingIntent.getBroadcast(mContent, requestCode, intent, 0);
+        AlarmManager am = (AlarmManager) mContent.getSystemService(Context.ALARM_SERVICE);
+        am.cancel(pi);
     }
 
     @TargetApi(Build.VERSION_CODES.KITKAT)
