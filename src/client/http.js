@@ -72,8 +72,8 @@ export default class Http {
         return this.execute(this.#api + path, 'put', data);
     }
 
-    delete(path: string): Promise<Response> {
-        return this.execute(this.#api + path, 'delete');
+    delete(path: string, data): Promise<Response> {
+        return this.execute(this.#api + path, 'delete', data);
     }
 
 }
