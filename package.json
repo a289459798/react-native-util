@@ -1,5 +1,5 @@
 {
-  "_from": "git+https://gitee.com/petdoctor/react-native-util.git",
+  "_from": "git+https://github.com/a289459798/react-native-util.git",
   "_id": "@ichong/react-native-util@1.0.1",
   "_inBundle": false,
   "_integrity": "",
@@ -7,22 +7,22 @@
   "_phantomChildren": {},
   "_requested": {
     "type": "git",
-    "raw": "@attacks/react-native-util@git+https://gitee.com/petdoctor/react-native-util.git",
+    "raw": "@attacks/react-native-util@git+https://github.com/a289459798/react-native-util.git",
     "name": "@attacks/react-native-util",
     "escapedName": "@attacks%2freact-native-util",
     "scope": "@attacks",
-    "rawSpec": "git+https://gitee.com/petdoctor/react-native-util.git",
-    "saveSpec": "git+https://gitee.com/petdoctor/react-native-util.git",
-    "fetchSpec": "https://gitee.com/petdoctor/react-native-util.git",
+    "rawSpec": "git+https://github.com/a289459798/react-native-util.git",
+    "saveSpec": "git+https://github.com/a289459798/react-native-util.git",
+    "fetchSpec": "https://github.com/a289459798/react-native-util.git",
     "gitCommittish": null
   },
   "_requiredBy": [
     "#USER",
     "/"
   ],
-  "_resolved": "git+https://gitee.com/petdoctor/react-native-util.git#8e01dff148a2d52138496359cd32a8ee4ed6308b",
+  "_resolved": "git+https://github.com/a289459798/react-native-util.git#8e01dff148a2d52138496359cd32a8ee4ed6308b",
   "_shasum": "486b3a175fae953bf38677286528d9593c155f81",
-  "_spec": "@attacks/react-native-util@git+https://gitee.com/petdoctor/react-native-util.git",
+  "_spec": "@attacks/react-native-util@git+https://github.com/a289459798/react-native-util.git",
   "author": {
     "name": "zhangzy"
   },
