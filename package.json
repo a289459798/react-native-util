@@ -7,10 +7,10 @@
   "_phantomChildren": {},
   "_requested": {
     "type": "git",
-    "raw": "@ichong/react-native-util@git+https://gitee.com/petdoctor/react-native-util.git",
-    "name": "@ichong/react-native-util",
-    "escapedName": "@ichong%2freact-native-util",
-    "scope": "@ichong",
+    "raw": "@attacks/react-native-util@git+https://gitee.com/petdoctor/react-native-util.git",
+    "name": "@attacks/react-native-util",
+    "escapedName": "@attacks%2freact-native-util",
+    "scope": "@attacks",
     "rawSpec": "git+https://gitee.com/petdoctor/react-native-util.git",
     "saveSpec": "git+https://gitee.com/petdoctor/react-native-util.git",
     "fetchSpec": "https://gitee.com/petdoctor/react-native-util.git",
@@ -22,8 +22,7 @@
   ],
   "_resolved": "git+https://gitee.com/petdoctor/react-native-util.git#8e01dff148a2d52138496359cd32a8ee4ed6308b",
   "_shasum": "486b3a175fae953bf38677286528d9593c155f81",
-  "_spec": "@ichong/react-native-util@git+https://gitee.com/petdoctor/react-native-util.git",
-  "_where": "/Users/zhangzy/workspace/android/5ichong/academy",
+  "_spec": "@attacks/react-native-util@git+https://gitee.com/petdoctor/react-native-util.git",
   "author": {
     "name": "zhangzy"
   },
@@ -34,13 +33,13 @@
   },
   "deprecated": false,
   "description": "## Getting started",
-  "homepage": "https://gitee.com/petdoctor/react-native-util.git#readme",
+  "homepage": "https://github.com/a289459798/react-native-util.git#readme",
   "keywords": [
     "react-native"
   ],
   "license": "ISC",
   "main": "index.js",
-  "name": "@ichong/react-native-util",
+  "name": "@attacks/react-native-util",
   "peerDependencies": {
     "react-native": "^0.41.2",
     "@react-native-community/async-storage": "^1.6.3",
@@ -48,7 +47,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://gitee.com/petdoctor/react-native-util.git"
+    "url": "https://github.com/a289459798/react-native-util.git"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
