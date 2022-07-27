@@ -1,9 +1,9 @@
 {
   "_from": "git+https://github.com/a289459798/react-native-util.git",
-  "_id": "@ichong/react-native-util@1.0.1",
+  "_id": "@attacks/react-native-util@1.0.1",
   "_inBundle": false,
   "_integrity": "",
-  "_location": "/@ichong/react-native-util",
+  "_location": "/@attacks/react-native-util",
   "_phantomChildren": {},
   "_requested": {
     "type": "git",
