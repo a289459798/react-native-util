@@ -1,5 +1,5 @@
 import {NativeModules, Platform, PermissionsAndroid} from 'react-native';
-import CameraRoll from '@react-native-community/cameraroll';
+import CameraRoll from '@react-native-camera-roll/camera-roll';
 import file from './file';
 import RNFS from 'react-native-fs';
 

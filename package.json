@@ -41,7 +41,8 @@
   "main": "index.js",
   "name": "@attacks/react-native-util",
   "peerDependencies": {
-    "@react-native-community/push-notification-ios": "^1.0.3"
+    "@react-native-community/push-notification-ios": "^1.0.3",
+    "@react-native-camera-roll/camera-roll": "^7.4.0"
   },
   "repository": {
     "type": "git",

@@ -65,4 +65,4 @@ class file {
 
 }
 
-module.exports = new file();
+export default new file();
