@@ -7,16 +7,16 @@ const {RNICImagePicker} = NativeModules;
 
 class ICImagePicker {
 
-    open(params = {}, select = [], callback) {
+    open(params = {}, select: any[] = [], callback: Function) {
         RNICImagePicker.open(params, select, callback);
     }
 
-    save(url) {
+    save(url: string) {
         if (Platform.OS === 'ios') {
             return RNICImagePicker.save(url);
         } else {
             return new Promise((callback, errorCallback) => {
-                PermissionsAndroid.check(PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE).then((res) => {
+                PermissionsAndroid.check(PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE).then((res: boolean) => {
                     if (!res) {
                         PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE,
                             {
@@ -25,7 +25,7 @@ class ICImagePicker {
                                     '需要保存图片到相册',
                                 buttonNegative: '残忍拒绝',
                                 buttonPositive: '同意',
-                            }).then((granted) => {
+                            }).then((granted: string) => {
                             if (granted === PermissionsAndroid.RESULTS.GRANTED) {
                                 this._saveWithAndroid(url, callback, errorCallback);
                             } else {
@@ -40,27 +40,27 @@ class ICImagePicker {
         }
     }
 
-    _saveWithAndroid(url, callback, errorCallback) {
+    _saveWithAndroid(url: string, callback: Function, errorCallback: Function) {
         if (url.indexOf('http') === 0) {
-            file.download('share', 'share.png', url).then((res) => {
+            file.download('share', 'share.png', url).then(() => {
                 setTimeout(() => {
                     CameraRoll.saveToCameraRoll('file://' + RNFS.ExternalDirectoryPath + '/share/share.png').then(() => {
                         callback();
-                    }, error => {
+                    }, (error: any) => {
                         errorCallback(error);
                     });
                 }, 300);
-            }, (error) => {
+            }, (error: any) => {
                 errorCallback(error);
             });
         } else {
-            file.write('share', 'share.png', url, 'base64').then((res) => {
+            file.write('share', 'share.png', url, 'base64').then(() => {
                 CameraRoll.saveToCameraRoll('file://' + RNFS.ExternalDirectoryPath + '/share/share.png').then(() => {
                     callback();
-                }, error => {
+                }, (error: any) => {
                     errorCallback(error);
                 });
-            }, (error) => {
+            }, (error: any) => {
                 errorCallback(error);
             });
         }

@@ -4,23 +4,23 @@ const {RNEncrypt} = NativeModules;
 
 class EncryptManage {
 
-    string2GBK(str, callback) {
-        RNEncrypt.string2GBK(str, (data) => {
-            callback && callback(data);
+    string2GBK(str: string, callback?: Function) {
+        RNEncrypt.string2GBK(str, (data: any) => {
+            callback?.(data);
         });
     }
 
-    encode(str, key) {
+    encode(str: string, key: string) {
         return new Promise(function (callback, errorCallback) {
-            RNEncrypt.encode(str, key).then((data) => {
+            RNEncrypt.encode(str, key).then((data: any) => {
                 callback(data);
             });
         });
     }
 
-    decode(str, key) {
+    decode(str: string, key: string) {
         return new Promise(function (callback, errorCallback) {
-            RNEncrypt.decode(str, key).then((data) => {
+            RNEncrypt.decode(str, key).then((data: any) => {
                 callback(data);
             }, (error) => {
                 errorCallback(error);

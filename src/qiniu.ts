@@ -4,18 +4,18 @@ const {RNQiNiu} = NativeModules;
 
 class QNManage {
 
-    upload(files: Array, token, dir = '', zone = 'zone0') {
+    upload(files: [], token: string, dir: string = '', zone: string = 'zone0') {
         return new Promise(function (callback, errorCallback) {
             if (Platform.OS === 'ios') {
-                RNQiNiu.upload(files, token, dir).then((data) => {
+                RNQiNiu.upload(files, token, dir).then((data: any) => {
                     callback(data);
-                }, (error) => {
+                }, () => {
                     errorCallback({message: '上传失败'});
                 });
             } else {
-                RNQiNiu.upload(files, token, dir, zone).then((data) => {
+                RNQiNiu.upload(files, token, dir, zone).then((data: any) => {
                     callback(data);
-                }, (error) => {
+                }, () => {
                     errorCallback({message: '上传失败'});
                 });
             }

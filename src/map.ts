@@ -9,11 +9,11 @@ class Map {
             let items = [];
             if (Platform.OS === 'ios') {
                 items.push({key: 'iosmap', name: '苹果地图'});
-                Linking.canOpenURL('iosamap://').then((res) => {
+                Linking.canOpenURL('iosamap://').then((res: boolean) => {
                     if (res) {
                         items.push({key: 'iosamap', name: '高德地图'});
                     }
-                    Linking.canOpenURL('baidumap://').then((res) => {
+                    Linking.canOpenURL('baidumap://').then((res: boolean) => {
                         if (res) {
                             items.push({key: 'baidumap', name: '百度地图'});
                         }
@@ -21,11 +21,11 @@ class Map {
                     });
                 });
             } else {
-                RNMap.checkInstall('com.autonavi.minimap', (res) => {
+                RNMap.checkInstall('com.autonavi.minimap', (res: boolean) => {
                     if (res) {
                         items.push({key: 'iosamap', name: '高德地图'});
                     }
-                    RNMap.checkInstall('com.baidu.BaiduMap', (res) => {
+                    RNMap.checkInstall('com.baidu.BaiduMap', (res: boolean) => {
                         if (res) {
                             items.push({key: 'baidumap', name: '百度地图'});
                         }
@@ -36,7 +36,7 @@ class Map {
         });
     }
 
-    openMap(key, address) {
+    openMap(key: string, address: string) {
         switch (key) {
             case 'iosmap':
                 if (Platform.OS === 'ios') {

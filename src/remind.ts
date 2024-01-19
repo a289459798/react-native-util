@@ -1,12 +1,12 @@
-import {NativeModules, Linking, Alert} from 'react-native';
+import {NativeModules, Linking, Alert, Platform} from 'react-native';
 import PushNotificationIOS from '@react-native-community/push-notification-ios';
 
 const {RNRemind} = NativeModules;
 
 class Remind {
 
-    notify(title, time, userInfo = {}) {
-        this.notifyEnabled((state) => {
+    notify(title: string, time: Date, userInfo = {}) {
+        this.notifyEnabled((state: boolean) => {
             if (state) {
                 if (Platform.OS === 'ios') {
                     PushNotificationIOS.scheduleLocalNotification({
@@ -24,7 +24,7 @@ class Remind {
         });
     }
 
-    delNotify(time, userInfo = {}) {
+    delNotify(time: any, userInfo = {}) {
         if (Platform.OS === 'ios') {
             PushNotificationIOS.cancelLocalNotifications({content: JSON.stringify(userInfo)});
         } else {
@@ -32,10 +32,10 @@ class Remind {
         }
     }
 
-    notifyEnabled(callback) {
+    notifyEnabled(callback?: Function) {
         if (Platform.OS === 'ios') {
-            PushNotificationIOS.checkPermissions((data) => {
-                callback && callback(data.alert);
+            PushNotificationIOS.checkPermissions((data: any) => {
+                callback?.(data.alert);
             });
         } else {
             RNRemind.notifyEnabled(callback);

@@ -10,9 +10,9 @@ import RNFS from 'react-native-fs';
 
 class file {
 
-    async download(dir = '', file, data) {
+    async download(dir: string = '', file: string, data: string) {
         let path = this.getCachePath() + dir + '/';
-        return await RNFS.exists(path).then(exists => {
+        return await RNFS.exists(path).then((exists: boolean) => {
             if (!exists) {
                 return RNFS.mkdir(path).then(() => {
                     return this._download(path + file, data);
@@ -26,7 +26,7 @@ class file {
         return Platform.OS === 'ios' ? RNFS.LibraryDirectoryPath + '/Caches/' : RNFS.ExternalDirectoryPath + '/';
     }
 
-    _download(path, data) {
+    _download(path: string, data: string) {
         const options = {
             fromUrl: data,
             toFile: path,
@@ -35,13 +35,13 @@ class file {
         return RNFS.downloadFile(options).promise;
     }
 
-    exists(dir = '', file) {
+    exists(dir = '', file: string) {
         return RNFS.exists(this.getCachePath() + dir + '/' + file);
     }
 
-    async write(dir, file, data, encoding = 'utf8') {
+    async write(dir: string, file: string, data: string, encoding: string = 'utf8') {
         let path = this.getCachePath() + dir + '/';
-        return await RNFS.exists(path).then(exists => {
+        return await RNFS.exists(path).then((exists: boolean) => {
             if (!exists) {
                 return RNFS.mkdir(path).then(() => {
                     return RNFS.writeFile(path + file, data, encoding);
@@ -51,15 +51,15 @@ class file {
         });
     }
 
-    read(dir, file) {
+    read(dir: string, file: string) {
         return RNFS.readFile(this.getCachePath() + dir + '/' + file);
     }
 
-    readDir(dir = '', isAbsolute = false) {
+    readDir(dir: string = '', isAbsolute: boolean = false) {
         return RNFS.readDir(!isAbsolute ? this.getCachePath() + dir : dir);
     }
 
-    unlink(path) {
+    unlink(path: string) {
         return RNFS.unlink(path);
     }
 
