@@ -20,6 +20,6 @@ Pod::Spec.new do |s|
   s.dependency 'Qiniu', '~> 7.1'
   s.dependency 'TZImagePickerController', '~> 3.3.1'
   s.dependency "SDWebImage"
-  s.dependency "YBImageBrowser"
+  s.dependency "YBImageBrowser", :git => 'https://github.com/QiuYeHong90/YBImageBrowser.git'
 end
 
