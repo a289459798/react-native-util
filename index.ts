@@ -5,6 +5,7 @@ import Event from './src/event';
 import Map from './src/map';
 import ICImagePicker from './src/imagePicker';
 import ICFile from './src/file';
+import ImageBrowser from './src/imageBrowser';
 
 export {
     QiNiu,
@@ -13,5 +14,6 @@ export {
     Event,
     Map,
     ICImagePicker,
-    ICFile
+    ICFile,
+    ImageBrowser,
 };
