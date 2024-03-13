@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.net.Uri;
+
 import com.facebook.react.bridge.Callback;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
@@ -55,16 +56,16 @@ public class RNMapModule extends ReactContextBaseJavaModule {
             case "gaode":
                 intent.setPackage("com.autonavi.minimap");
                 intent.addCategory("android.intent.category.DEFAULT");
-                intent.setData(Uri.parse("androidamap://route?sourceApplication=" + R.string.app_name
-                    + "&sname=我的位置"
-                    + "&dname=" + address
-                    + "&dev=0&m=0&t=1"));
+                intent.setData(Uri.parse("androidamap://route?sourceApplication=" + mContent.getResources().getIdentifier("app_name", "string", mContent.getPackageName())
+                        + "&sname=我的位置"
+                        + "&dname=" + address
+                        + "&dev=0&m=0&t=1"));
                 mContent.startActivity(intent);
                 break;
             case "baidu":
                 intent.setData(Uri.parse("baidumap://map/direction?origin=我的位置&destination="
-                    + address
-                    + "&mode=transit&sy=3&index=0&target=1"));
+                        + address
+                        + "&mode=transit&sy=3&index=0&target=1"));
                 mContent.startActivity(intent);
                 break;
             default:
