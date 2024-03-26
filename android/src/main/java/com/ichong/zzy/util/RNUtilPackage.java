@@ -10,11 +10,12 @@ import com.facebook.react.bridge.NativeModule;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.uimanager.ViewManager;
 import com.facebook.react.bridge.JavaScriptModule;
+import com.ichong.zzy.design.rn.RNImageBrowserModule;
 
 public class RNUtilPackage implements ReactPackage {
     @Override
     public List<NativeModule> createNativeModules(ReactApplicationContext reactContext) {
-        return Arrays.<NativeModule>asList(new RNUtilModule(reactContext), new RNQiNiuModule(reactContext), new RNRemindModule(reactContext), new RNMapModule(reactContext), new RNEncryptModule(reactContext), new RNICImagePickerModule(reactContext));
+        return Arrays.<NativeModule>asList(new RNUtilModule(reactContext), new RNQiNiuModule(reactContext), new RNRemindModule(reactContext), new RNMapModule(reactContext), new RNEncryptModule(reactContext), new RNICImagePickerModule(reactContext), new RNImageBrowserModule(reactContext));
     }
 
     // Deprecated from RN 0.47
