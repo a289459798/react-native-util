@@ -13,13 +13,16 @@ Pod::Spec.new do |s|
   s.author             = { "author" => "zhangzy@5ichong.cn" }
   s.platform     = :ios, "9.0"
   s.source       = { :git => "https://github.com/author/RNUtil.git", :tag => "master" }
-  s.source_files  = "ios/**/*.{h,m}"
+  s.source_files  = "ios/**/*"
   s.requires_arc = true
+  s.swift_version    = '5.0'
 
   s.dependency "React"
   s.dependency 'Qiniu', '~> 7.1'
   s.dependency 'TZImagePickerController', '~> 3.3.1'
   s.dependency "SDWebImage"
-  s.dependency "YBImageBrowser"
+  s.dependency 'JXPhotoBrowser'
+
+
 end
 
