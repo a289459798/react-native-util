@@ -41,7 +41,7 @@ dependencies {
     // 图片压缩 (按需引入)
     implementation 'io.github.lucksiege:compress:v3.11.2'
     // 图片裁剪 (按需引入)
-    compileOnly 'io.github.lucksiege:ucrop:v3.11.2'
+    implementation 'io.github.lucksiege:ucrop:v3.11.2'
     // 查看大图
     implementation 'com.github.SherlockGougou:BigImageViewPager:androidx-7.3.0'
 }
