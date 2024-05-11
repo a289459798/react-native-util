@@ -42,8 +42,8 @@ class Remind {
         }
     }
 
-    openSetting() {
-        Alert.alert('提示', '需要开启/关闭推送功能', [
+    openSetting(msg:string = '需要开启/关闭推送功能') {
+        Alert.alert('提示', msg, [
             {
                 text: '取消', onPress: () => {
                 }, style: 'cancel',
