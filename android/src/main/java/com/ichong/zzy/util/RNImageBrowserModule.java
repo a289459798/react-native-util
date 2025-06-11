@@ -23,11 +23,6 @@ public class RNImageBrowserModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    public void show(ReadableArray list) {
-        show(list, 0);
-    }
-
-    @ReactMethod
     public void show(ReadableArray list, int index) {
         ArrayList<String> images = new ArrayList<>();
         for (int i = 0; i < list.size(); i++) {
