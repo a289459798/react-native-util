@@ -1,5 +1,5 @@
 
-package com.ichong.zzy.design.rn;
+package com.ichong.zzy.util;
 
 import cc.shinichi.library.ImagePreview;
 import cc.shinichi.library.bean.ImageInfo;
