@@ -10,7 +10,6 @@ import com.facebook.react.bridge.NativeModule;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.uimanager.ViewManager;
 import com.facebook.react.bridge.JavaScriptModule;
-import com.ichong.zzy.design.rn.RNImageBrowserModule;
 
 public class RNUtilPackage implements ReactPackage {
     @Override
