@@ -1,13 +1,12 @@
-import {DeviceEventEmitter} from 'react-native';
+import {NativeEventEmitter, NativeModules} from 'react-native';
+const {RNUtil} = NativeModules;
 
-export default {
+class Event extends NativeEventEmitter {
 
-    emit: (eventType: string, data: any) => {
-        return DeviceEventEmitter.emit(eventType, data);
-    },
-
-    addListener: (type: string, listener: (data: any) => void, context?: any) => {
-        return DeviceEventEmitter.addListener(type, listener);
-    },
-
+    // 构造
+    constructor() {
+        super(RNUtil);
+    }
 }
+
+export default new Event();
