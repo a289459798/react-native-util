@@ -34,7 +34,7 @@ RCT_REMAP_METHOD(upload,
             return;
         }
         NSData *data = [NSData dataWithContentsOfFile:[obj objectForKey:@"uri"]];
-        [self uploadForQiniu:data key:[NSString stringWithFormat:@"%@%@%d", dir, [NSString stringWithFormat:@"%.f", [[NSDate date] timeIntervalSince1970]*1000], (int)(10000 + (arc4random() % 90000))] token:token success:^(id responseObject) {
+        [self uploadForQiniu:data key:[NSString stringWithFormat:@"%@%@%d.jpg", dir, [NSString stringWithFormat:@"%.f", [[NSDate date] timeIntervalSince1970]*1000], (int)(10000 + (arc4random() % 90000))] token:token success:^(id responseObject) {
             
             successCount++;
             
